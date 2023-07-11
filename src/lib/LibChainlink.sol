@@ -121,6 +121,7 @@ library LibChainlink {
         // Checked time comparison ensures no updates from the future as that
         // would overflow, and no stale prices.
         // solhint-disable-next-line not-rely-on-time
+        //slither-disable-next-line timestamp
         if (currentTimestamp - updatedAt > staleAfter) {
             revert StalePrice(updatedAt, staleAfter);
         }
