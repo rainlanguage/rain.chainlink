@@ -69,4 +69,22 @@ contract LibChainlinkStalePriceTest is Test {
         price = LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
         (price);
     }
+
+    /// If the updatedAt time is in the future this must revert.
+    function testStalePriceFutureUpdatedAt(
+        uint256 currentTimestamp,
+        uint256 staleAfter,
+        uint256 scalingFlags,
+        int256 answer,
+        uint256 updatedAt,
+        uint8 decimals
+    ) external {
+        answer = bound(answer, 1, type(int256).max);
+        vm.assume(updatedAt > currentTimestamp);
+        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.expectRevert(stdError.arithmeticError);
+        uint256 price =
+            LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
+        (price);
+    }
 }
