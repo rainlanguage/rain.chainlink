@@ -22,5 +22,5 @@ bytecode_hash = "none"
 cbor_metadata = false
 
 [fuzz]
-runs = 1024
+runs = 2048
 seed = '0x3e8'
