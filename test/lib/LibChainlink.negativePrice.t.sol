@@ -2,7 +2,7 @@
 pragma solidity =0.8.18;
 
 import "forge-std/Test.sol";
-import {WillOverflow} from "rain.math.fixedpoint/../test/WillOverflow.sol";
+import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
 import "src/lib/LibChainlink.sol";
 
@@ -22,7 +22,7 @@ contract LibChainlinkNegativePriceTest is Test {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
-        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
             LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
         (price);
@@ -40,7 +40,7 @@ contract LibChainlinkNegativePriceTest is Test {
         answer = bound(answer, type(int256).min, -1);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
-        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         vm.expectRevert(abi.encodeWithSelector(NotPosIntPrice.selector, answer));
         uint256 price =
             LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
@@ -58,7 +58,7 @@ contract LibChainlinkNegativePriceTest is Test {
         int256 answer = 0;
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
-        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         vm.expectRevert(abi.encodeWithSelector(NotPosIntPrice.selector, answer));
         uint256 price =
             LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);

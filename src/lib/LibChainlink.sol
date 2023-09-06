@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: CAL
 pragma solidity ^0.8.18;
 
-import "rain.math.fixedpoint/FixedPointDecimalScale.sol";
+import "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
 import "../interface/AggregatorV3Interface.sol";
 
 /// Thrown if a price is zero or negative as this is probably not anticipated or
@@ -34,7 +34,7 @@ error StalePrice(uint256 updatedAt, uint256 staleAfter);
 /// use case for Chainlink oracles, and the most common use case for Chainlink
 /// oracles in the context of Rain Protocol.
 library LibChainlink {
-    using FixedPointDecimalScale for uint256;
+    using LibFixedPointDecimalScale for uint256;
 
     /// Returns a single price value from a Chainlink oracle. This wraps the
     /// `latestRoundData` function from the `AggregatorV3Interface` interface

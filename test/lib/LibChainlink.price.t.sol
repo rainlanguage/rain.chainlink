@@ -2,7 +2,7 @@
 pragma solidity =0.8.18;
 
 import "forge-std/Test.sol";
-import {WillOverflow} from "rain.math.fixedpoint/../test/WillOverflow.sol";
+import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
 import "src/lib/LibChainlink.sol";
 
@@ -32,7 +32,7 @@ contract LibChainlinkPriceTest is Test {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= block.timestamp);
         staleAfter = bound(staleAfter, block.timestamp - updatedAt, type(uint256).max);
-        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
             LibChainlink.roundDataToPrice(block.timestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
         vm.mockCall(

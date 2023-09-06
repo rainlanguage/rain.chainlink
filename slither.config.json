@@ -1,3 +1,3 @@
 {
-    "filter_paths": "forge-std,openzeppelin,test"
+    "filter_paths": "forge-std,openzeppelin,test,rain.math.fixedpoint"
 }
