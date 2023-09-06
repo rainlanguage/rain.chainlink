@@ -3,8 +3,8 @@ pragma solidity =0.8.18;
 
 import "forge-std/Test.sol";
 
-import "rain.math.fixedpoint/FixedPointDecimalScale.sol";
-import {WillOverflow} from "rain.math.fixedpoint/../test/WillOverflow.sol";
+import "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
+import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
 import "src/lib/LibChainlink.sol";
 
@@ -13,7 +13,7 @@ import "src/lib/LibChainlink.sol";
 /// matches the upstream rain fixed math lib, for whatever decimals Chainlink
 /// reports.
 contract LibChainlinkScalingTest is Test {
-    using FixedPointDecimalScale for uint256;
+    using LibFixedPointDecimalScale for uint256;
 
     /// Test that the scaling matches the upstream rain fixed math lib, for
     /// whatever decimals Chainlink reports. This test checks with saturation
@@ -30,7 +30,7 @@ contract LibChainlinkScalingTest is Test {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
-        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
             LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
         assertEq(price, uint256(answer).scale18(decimals, scalingFlags));
@@ -49,7 +49,7 @@ contract LibChainlinkScalingTest is Test {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
-        vm.assume(!WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
             LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
         assertEq(price, uint256(answer).scale18(decimals, scalingFlags));
@@ -68,7 +68,7 @@ contract LibChainlinkScalingTest is Test {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
-        vm.assume(WillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
+        vm.assume(LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         vm.expectRevert(stdError.arithmeticError);
         uint256 price =
             LibChainlink.roundDataToPrice(currentTimestamp, staleAfter, scalingFlags, answer, updatedAt, decimals);
