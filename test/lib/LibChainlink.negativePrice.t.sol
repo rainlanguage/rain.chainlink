@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.18;
 
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
-import "src/lib/LibChainlink.sol";
+import {LibChainlink, NotPosIntPrice} from "src/lib/LibChainlink.sol";
 
 /// @title LibChainlinkNegativePrice
 /// Test that negative prices are not allowed and that all positive prices are

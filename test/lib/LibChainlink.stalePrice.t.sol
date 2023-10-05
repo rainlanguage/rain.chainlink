@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.18;
 
-import "forge-std/Test.sol";
+import {Test, stdError} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
-import "src/lib/LibChainlink.sol";
+import {LibChainlink, StalePrice} from "src/lib/LibChainlink.sol";
 
 /// @title LibChainlinkStalePriceTest
 /// Test that stale prices are not allowed and that all non-stale prices are

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: CAL
 pragma solidity ^0.8.18;
 
-import "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
-import "../interface/AggregatorV3Interface.sol";
+import {LibFixedPointDecimalScale} from "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
+import {AggregatorV3Interface} from "../interface/AggregatorV3Interface.sol";
 
 /// Thrown if a price is zero or negative as this is probably not anticipated or
 /// useful for most users of a price feed. Of course there are use cases where
