@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.18;
 
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
-import "src/lib/LibChainlink.sol";
+import {LibChainlink} from "src/lib/LibChainlink.sol";
+import {AggregatorV3Interface} from "src/interface/AggregatorV3Interface.sol";
 
 /// @title LibChainlinkPriceTest
 /// Test that the `price` function matches the `roundDataToPrice` function.

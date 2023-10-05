@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: CAL
 pragma solidity =0.8.18;
 
-import "forge-std/Test.sol";
+import {Test, stdError} from "forge-std/Test.sol";
 
-import "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
+import {LibFixedPointDecimalScale} from "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
-import "src/lib/LibChainlink.sol";
+import {LibChainlink} from "src/lib/LibChainlink.sol";
 
 /// @title LibChainlinkScalingTest
 /// Test that scaling works as expected. This just has to check that the scaling
