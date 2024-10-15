@@ -6,7 +6,7 @@ import {Test} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
 import {LibChainlink} from "src/lib/LibChainlink.sol";
-import {AggregatorV3Interface} from "chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+import {AggregatorV3Interface} from "chainlink/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 /// @title LibChainlinkPriceTest
 /// Test that the `price` function matches the `roundDataToPrice` function.
