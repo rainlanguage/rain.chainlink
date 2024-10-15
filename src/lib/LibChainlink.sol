@@ -2,7 +2,7 @@
 pragma solidity ^0.8.18;
 
 import {LibFixedPointDecimalScale} from "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
-import {AggregatorV3Interface} from "../interface/AggregatorV3Interface.sol";
+import {AggregatorV3Interface} from "chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 /// Thrown if a price is zero or negative as this is probably not anticipated or
 /// useful for most users of a price feed. Of course there are use cases where

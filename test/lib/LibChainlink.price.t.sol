@@ -5,7 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
 
 import {LibChainlink} from "src/lib/LibChainlink.sol";
-import {AggregatorV3Interface} from "src/interface/AggregatorV3Interface.sol";
+import {AggregatorV3Interface} from "chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 /// @title LibChainlinkPriceTest
 /// Test that the `price` function matches the `roundDataToPrice` function.
@@ -31,7 +31,7 @@ contract LibChainlinkPriceTest is Test {
         vm.etch(feed, hex"00");
 
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= block.timestamp);
+        updatedAt = bound(updatedAt, 0, block.timestamp);
         staleAfter = bound(staleAfter, block.timestamp - updatedAt, type(uint256).max);
         vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
