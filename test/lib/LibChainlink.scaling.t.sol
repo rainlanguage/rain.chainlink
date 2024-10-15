@@ -29,7 +29,7 @@ contract LibChainlinkScalingTest is Test {
         uint8 decimals
     ) external pure {
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= currentTimestamp);
+        updatedAt = bound(updatedAt, 0, currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
         vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
@@ -48,7 +48,7 @@ contract LibChainlinkScalingTest is Test {
         uint8 decimals
     ) external pure {
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= currentTimestamp);
+        updatedAt = bound(updatedAt, 0, currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
         vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
@@ -67,7 +67,7 @@ contract LibChainlinkScalingTest is Test {
         uint8 decimals
     ) external {
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= currentTimestamp);
+        updatedAt = bound(updatedAt, 0, currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
         vm.assume(LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         vm.expectRevert(stdError.arithmeticError);
