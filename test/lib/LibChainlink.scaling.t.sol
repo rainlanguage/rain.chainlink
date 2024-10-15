@@ -1,5 +1,6 @@
-// SPDX-License-Identifier: CAL
-pragma solidity =0.8.18;
+// SPDX-License-Identifier: LicenseRef-DCL-1.0
+// SPDX-FileCopyrightText: Copyright (c) 2020 thedavidmeister
+pragma solidity =0.8.28;
 
 import {Test, stdError} from "forge-std/Test.sol";
 
@@ -26,9 +27,9 @@ contract LibChainlinkScalingTest is Test {
         int256 answer,
         uint256 updatedAt,
         uint8 decimals
-    ) external {
+    ) external pure {
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= currentTimestamp);
+        updatedAt = bound(updatedAt, 0, currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
         vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
@@ -45,9 +46,9 @@ contract LibChainlinkScalingTest is Test {
         int256 answer,
         uint256 updatedAt,
         uint8 decimals
-    ) external {
+    ) external pure {
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= currentTimestamp);
+        updatedAt = bound(updatedAt, 0, currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
         vm.assume(!LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         uint256 price =
@@ -66,7 +67,7 @@ contract LibChainlinkScalingTest is Test {
         uint8 decimals
     ) external {
         answer = bound(answer, 1, type(int256).max);
-        vm.assume(updatedAt <= currentTimestamp);
+        updatedAt = bound(updatedAt, 0, currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
         vm.assume(LibWillOverflow.scale18WillOverflow(uint256(answer), decimals, scalingFlags));
         vm.expectRevert(stdError.arithmeticError);
