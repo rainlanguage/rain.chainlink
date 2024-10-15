@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: CAL
-pragma solidity =0.8.18;
+pragma solidity =0.8.28;
 
 import {Test} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";
@@ -18,7 +18,7 @@ contract LibChainlinkNegativePriceTest is Test {
         int256 answer,
         uint256 updatedAt,
         uint8 decimals
-    ) external view {
+    ) external pure {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);

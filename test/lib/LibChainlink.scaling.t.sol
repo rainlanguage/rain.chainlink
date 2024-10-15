@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: CAL
-pragma solidity =0.8.18;
+pragma solidity =0.8.28;
 
 import {Test, stdError} from "forge-std/Test.sol";
 
@@ -26,7 +26,7 @@ contract LibChainlinkScalingTest is Test {
         int256 answer,
         uint256 updatedAt,
         uint8 decimals
-    ) external {
+    ) external pure {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
@@ -45,7 +45,7 @@ contract LibChainlinkScalingTest is Test {
         int256 answer,
         uint256 updatedAt,
         uint8 decimals
-    ) external {
+    ) external pure {
         answer = bound(answer, 1, type(int256).max);
         vm.assume(updatedAt <= currentTimestamp);
         staleAfter = bound(staleAfter, currentTimestamp - updatedAt, type(uint256).max);
