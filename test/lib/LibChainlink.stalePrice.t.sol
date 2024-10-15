@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LicenseRef-DCL-1.0
 // SPDX-FileCopyrightText: Copyright (c) 2020 thedavidmeister
-pragma solidity =0.8.28;
+pragma solidity =0.8.25;
 
 import {Test, stdError} from "forge-std/Test.sol";
 import {LibWillOverflow} from "rain.math.fixedpoint/lib/LibWillOverflow.sol";

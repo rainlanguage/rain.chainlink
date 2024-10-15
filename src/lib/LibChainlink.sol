@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LicenseRef-DCL-1.0
 // SPDX-FileCopyrightText: Copyright (c) 2020 thedavidmeister
-pragma solidity ^0.8.28;
+pragma solidity ^0.8.25;
 
 import {LibFixedPointDecimalScale} from "rain.math.fixedpoint/lib/LibFixedPointDecimalScale.sol";
 import {AggregatorV3Interface} from "chainlink/v0.8/shared/interfaces/AggregatorV3Interface.sol";
