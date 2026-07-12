@@ -17,8 +17,10 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - uses: DeterminateSystems/nix-installer-action@v4
-      - uses: DeterminateSystems/magic-nix-cache-action@v2
+      - uses: rainlanguage/rainix/.github/actions/nix-cachix-setup@main
+        with:
+          checkout: 'false'
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - run: nix develop -c rainix-sol-prelude
       - name: Run ${{ matrix.task }}
